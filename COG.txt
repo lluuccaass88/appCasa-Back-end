@@ -1,0 +1,42 @@
+ - Sistemas SCM têm recursos limitados para capturar conflitos indiretos que surgem devido à relação de dependência entre 
+artefatos compartilhados. 
+
+- propomos uma nova ferramenta de desenvolvimento colaborativo de software (CSD) chamada Collaboration Over GitHub
+ (COG), que fornece informações em tempo real sobre o surgimento de conflitos diretos e indiretos entre
+desenvolvedores colaborativos, trabalhando no GitHub, por meio de uma coleção de widgets de reconhecimento do espaço de trabalho.
+
+ - Este processo é realizado em tempo real, de forma a informar desenvolvedores sobre atividades simultâneas de outros desenvolvedores no mesmo artefato, levando a
+conflito ou em artefatos relacionados, levando a conflitos indiretos. Os desenvolvedores são avisados ​​sobre a possibilidade bilidades de conflito potencial por 
+meio de widgets de conscientização do espaço de trabalho [3–5] que exibem mudanças e informações de reconhecimento de presença no IDE dos desenvolvedores. 
+Na compreensão destes avisos mensagens, um desenvolvedor colaborativo pode entrar em contato com outro desenvolvedor colaborador e ambos trabalhar 
+em conjunto para a resolução do conflito emergente e evitar a entrada de inconsistências a base de código do projeto.
+
+- Existem já ferramentas com a proposta do artigo, mas segundo o artigo, a maioria foca na captura de conflitos diretos (mesmo arquivo) e as que focam em conflitos
+indiretos não conseguem fazer com excelencxia. 
+
+- O cliente é empacotado na forma de uma coleção de plug-ins do Eclipse que reside nos IDEs dos desenvolvedores individuais obtém informações de contexto em tempo 
+real sobre suas atividades. O servidor processa o tempo real informações de atividade recebidas de clientes individuais e as transforma em informações 
+diretas e indiretas. informações de conflito. Essas informações de alteração sobre o conflito resultante são encaminhadas aos clientes apropriados e exibidos em 
+seus IDEs usando vários plug-ins do Eclipse.
+
+
+- O COG frnece suporte para CSD no GitHub. COG captura conflitos indiretos refinados em um nível mais fino de granularidade.  COG distingue entre mudanças no 
+corpo do método, nome do método, parâmetros e tipo de retorno e informa a todos os desenvolvedores colaborativos. Adicionalmente, O COG também captura 
+mudanças no corpo do método e, portanto, é capaz de capturar e informar sobre conflitos em nível de instrução. Isso é feito com a ajuda de gráficos de 
+dependência que são usados ​​para armazenar relacionamento de dependência entre vários artefatos dentro do escopo de um projeto.
+
+- No COG Os desenvolvedores colaboradores estão conectados a um servidor central que armazena informações sobre o estado atual do projeto hospedado no GitHub
+e em espaços de trabalho de desenvolvedores individuais. O servidor também armazena informações de atividade de indivíduos clientes colaboradores. Todas 
+essas informações são usadas para gerar informações de reconhecimento de presença
+
+- Os desenvolvedores colaboradores estão conectados a um servidor central que armazena informações sobre o estado atual do projeto hospedado no GitHub
+e em espaços de trabalho de desenvolvedores individuais. O servidor também armazena informações de atividade de indivíduos clientes colaboradores. 
+Todas essas informações são usadas para gerar informações de reconhecimento de presença.
+
+- Implementando o COG
+  - Para um projeto específico, cada cliente precisa se registrar no UserCollaboration Engine que está hospedado no servidor Apache Tomcat. O servidor se conecta ao repositório público e clona o
+última versão do repositório que é usado para gerar o gráfico de dependência do projeto. O usuário O componente ActivityContext Analyzer do UserCollaboration 
+Engine cria a dependência gráfico do repositório do projeto clonado obtido do GitHub. Este gráfico de dependência é recriado em intervalos regulares como e 
+quando um clone atualizado do repositório remoto está disponível com o servidor. Isso é feito para refletir as mudanças no projeto, comprometidas pelos desenvolvedores colaboradores
+para o repositório remoto e, portanto, atualize o gráfico de dependência associado. Este gráfico é armazenado
+usando Neo4j Graph DB [70].
