@@ -23,6 +23,7 @@ app.listen(port, () => {
 })
 
 require('./controllers/authController')(app);
+require('./controllers/projectController')(app);
 
 //Express - roteamento: https://expressjs.com/pt-br/guide/routing.html
 //
